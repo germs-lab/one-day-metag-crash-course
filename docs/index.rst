@@ -11,8 +11,8 @@ Contents:
 .. toctree::
    :maxdepth: 3
 
-   ./source/intro
-   ./source/shell
+   intro
+   shell
 
 
 
