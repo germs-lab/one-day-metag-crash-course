@@ -4,22 +4,14 @@
    contain the root `toctree` directive.
 
 Welcome to Metagenomics One Day Crash Course!
-=============================================================
+=============================================
 
 Contents:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    intro/index
    shell/index
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
