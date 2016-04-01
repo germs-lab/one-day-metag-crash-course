@@ -28,8 +28,10 @@ There three main tutorial sections:
 
 .. toctree:
    :maxdepth: 2
-   :caption: Fetching data from and API
+   :caption: Fetching data from an API
 
    fetch-data/index
+
+
 
 
