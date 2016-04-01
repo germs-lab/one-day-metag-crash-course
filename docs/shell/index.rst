@@ -34,7 +34,7 @@ Learning Objectives
 --------------
 
 Using The Shell
-===============
+---------------
 
 Objectives
 ----------
@@ -71,8 +71,8 @@ There are many reasons to learn about the shell.
    shell.
 -  We're going to use it in this class, for all of the reasons above.
 
-.. figure:: https://github.com/edamame-course/data/blob/master/shell/gvng.jpg
-   :alt: Automation
+.. figure:: https://raw.githubusercontent.com/edamame-course/data/master/shell/gvng.jpg
+
 
    Automation
 
@@ -85,13 +85,11 @@ basic shell commands.
 Information on the shell
 ------------------------
 
-Here are some great shell cheat sheets: \* `Unix-Linux Command Cheat
-Sheet <http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/>`__
-\* `Software Carpentry Cheat
-Sheet <https://github.com/swcarpentry/boot-camps/blob/master/shell/shell_cheatsheet.md>`__
-\* `Explain shell <http://explainshell.com>`__ - a web site where you
-can see what the different components of a shell command are doing. \*
-`commandlinefu <http://www.commandlinefu.com>`__
+Here are some great shell cheat sheets:
+* `Unix-Linux Command Cheat Sheet <http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/>`__
+* `Software Carpentry Cheat Sheet <https://github.com/swcarpentry/boot-camps/blob/master/shell/shell_cheatsheet.md>`__
+* `Explain shell <http://explainshell.com>`__ - a web site where you can see what the different components of a shell command are doing.
+* `commandlinefu <http://www.commandlinefu.com>`__
 
 How to access the shell
 -----------------------
@@ -1027,10 +1025,10 @@ Congratulations, you just created your first shell script! You're set to
 rule the world.
 
 For Future Reference
-====================
+--------------------
 
 Finding files
-=============
+-------------
 
 The ``find`` program can be used to find files based on arbitrary
 criteria. Navigate to the ``data`` directory and enter the following
@@ -1078,18 +1076,3 @@ A faster way to do this is to use the ``xargs`` command:
 pipe them to ``xargs``. ``xargs`` takes the items given to it and passes
 them as arguments to ``grep``. ``xargs`` generally only creates a single
 instance of ``grep`` (or whatever program it is running).
-
-\*\*\* Help and other resources ## Where can I learn more about the
-shell? \* [Software Carpentry reference page]
-(http://swcarpentry.github.io/shell-novice/reference.html) \* Software
-Carpentry tutorial - `The Unix
-shell <http://software-carpentry.org/v4/shell/index.html>`__ \* The
-shell handout - `Command
-Reference <http://files.fosswire.com/2007/08/fwunixref.pdf>`__ \*
-`explainshell.com <http://explainshell.com>`__ \* `Intro to Bash
-Programming <http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html>`__ \* man
-bash \* Google - if you don't know how to do something, try Googling it.
-Other people have probably had the same question. \* Learn by doing.
-There's no real other way to learn this than by trying it out. Write
-your next paper in nano (really emacs or vi), open pdfs from the command
-line, automate something you don't really need to automate.
