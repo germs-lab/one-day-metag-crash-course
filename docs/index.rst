@@ -12,26 +12,23 @@ These are the tutorials for a one day course I will teach at Cambridge Universit
 
 There three main tutorial sections:
 
-* :ref:`shell`
-* :ref:`fetch`
-* :ref:`bioinfo`
-
 .. _shell:
 
 .. toctree::
    :maxdepth: 2 
-   :caption: Shell documentation 
 
    shell/index
 
-.. _fetch::
+.. _fetch-data:
 
-.. toctree:
+.. toctree::
    :maxdepth: 2
-   :caption: Fetching data from an API
 
    fetch-data/index
 
+.. _blast:
 
+.. toctree::
+   :maxdepth: 2
 
-
+   blast/index
