@@ -86,10 +86,10 @@ Information on the shell
 ------------------------
 
 Here are some great shell cheat sheets:
-* `Unix-Linux Command Cheat Sheet <http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/>`__
-* `Software Carpentry Cheat Sheet <https://github.com/swcarpentry/boot-camps/blob/master/shell/shell_cheatsheet.md>`__
-* `Explain shell <http://explainshell.com>`__ - a web site where you can see what the different components of a shell command are doing.
-* `commandlinefu <http://www.commandlinefu.com>`__
+- `Unix-Linux Command Cheat Sheet <http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/>`__
+- `Software Carpentry Cheat Sheet <https://github.com/swcarpentry/boot-camps/blob/master/shell/shell_cheatsheet.md>`__
+- `Explain shell <http://explainshell.com>`__ - a web site where you can see what the different components of a shell command are doing.
+- `commandlinefu <http://www.commandlinefu.com>`__
 
 How to access the shell
 -----------------------
