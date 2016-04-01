@@ -9,7 +9,7 @@ Welcome to Metagenomics One Day Crash Course!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :titlesonly: 
 
    intro/index
    shell/index
