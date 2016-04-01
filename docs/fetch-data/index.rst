@@ -1,10 +1,11 @@
-=================================================
-So you want to start using that big data in NCBI?
-=================================================
+===============================
+Fetching Data with the NCBI API
+===============================
 
-===================
+
 Learning objectives
-===================
+-------------------
+
 This is a tutorials for working with the data that is available in NCBI.  The learning objectives for this tutorial are as follows:
 
 1.  To be able to download specific gene sequences or genomes from NCBI (even with a big list of gene sequences).
@@ -22,9 +23,8 @@ The key challenge that we will work through...or your mission, if you choose to 
 
 You have been delivered three dogma-changing metagenomes (sequencing datasets) originating from three different Iowa crop soils (corn, soybean, and prairie).  You are interesting in identifying nitrogen fixation genes that are associated with native bacteria in these soils.  Nitrogen fixation is a natural process performed by bacteria that converts nitrogen in the atmosphere into a form that is usable for plants.  If we can optimize natural nitrogen fixation, our hope is to reduce nitrogen fertilizer inputs that may contribute to the eutrophication of downstream waters (e.g., dead zones in the Gulf of Mexico).
 
-==========
 Your tools
-==========
+----------
 
 Get your EC2 instance going - you need an Ubuntu 14.0 based instance (64-bit) with at least 4 cores.
 Then install the software::
@@ -45,9 +45,8 @@ And finally...::
     cp blast-2.2.26/bin/* /usr/local/bin
     cd /home/ubuntu
 
-================
 Getting the Data
-================
+----------------
 
 Task 1
 ------
@@ -237,127 +236,3 @@ You'll see that the *id* here is a string character which is obtained from list 
 Task 14
 -------
 Take a break.   Put up your pink stickie if you need help with this.
-
-====================================
-Comparing your data to the databases
-====================================
-
-So there are lots of ways to do this and arguably "blasting" is one of the most common.  If you're already familiar with how to run BLAST, you can just tackle this next task.  Else, instructions from Titus Brown's NGS course are below.
-
-Task 15
--------
-Format your nifH database for BLAST and then perform an alignment (with BLAST) of your metagenomes against your new database.  You should also add your lit search genes (those 30 genes) into your NCBI downloaded genes if you're up to the challenge -- it takes a couple steps.  I would suggest something like the following variables::
-
-    blastall -i <metagenome file> -d <nifh-db> -m 8 -a 8 -p blastn -o <metag.blastnout.m8> -b 1 -e 1e-5
-
-This takes a bit of time...so stretch a bit.  Like all good bioformaticians, you should go do something fun while the computer does all the work.  If you want to see it running, try using the "top" command.
-
-.. Note::
-
-    `BLAST initiation or refresher tutorial <http://angus.readthedocs.org/en/2014/running-command-line-blast.html>`_.  I have put a cheatsheet of the commands I used in the scripts directory -- if you need another hint.
-
-Task 16
--------
-Examine your blast outputs.  What do the first few lines contain?  How many hits do you have per metagenome to your database?
-
-=======================
-Next steps, what's next
-=======================
-
-Let's step back.  What is the reason for annotating your genes?  You want to get an idea of what genes are in each soil metagenome as well as a quantitative estimate of each gene.   Eventually, you would likely use this information to do some statistical analyses -- maybe in sophisticated packages like Qiime, Mothur, or Phyloseq.  All these programs take similar inputs, and the big secret is knowing what they are and how to parse/move/shift/wrangel this information into the specific format needed for each program:
-
-#. Metadata/Environmental data - What treatment does corn.fa represent -- duh, corn!  When was it sampled?  What kind of other data have you collected on this sample (amount of fertilizer, etc).
-#. Annotation information - What are the corresponding annotations to whatever shortcut ID associated with your genes (e.g., GI number).  This file can also contain some ontology / hierarchical information (e.g., Taxonomy domains / phyla / species).
-#. Abundance estimates - What are the estimates of each gene in each metagenome sample.
-
-Of these, you should be able to make a metadata file for your experiment.  The annotation file can be provided by your database.
-
-You have a list of genes GI IDs and can pull the annotation of the gene from the header in the database nucleotide file OR better yet from the Genbank file.  For example, you might pull out the lineage of each gene from the Genbank file and have taxonomy to provide for each gene.
-
-Perhaps the most difficult is to get the abundance estimates.  Intuitively, you can think about how to get this out of the BLAST outputs.  I observed Gene X, Y times in dataset I, Z times in dataset II.  Fortunately, I have a script to do this computationally.
-
-Task 17
--------
-Produce an abundance table of all genes in your 3 metagenomes::
-
-    python count-up.py <all your blast output files>
-
-For example::
-
-    python scripts/count-up.py  data/*blastnout
-
-This script produces a file, 'summary-count.tsv'.
-
-Task 18
--------
-Take a look at 'summary-count.tsv'.  What's in it?
-
-Task 19
--------
-Often, I get really excited and need to know what gene is associated with each Gene ID.  I like to pull in my annotations.  Let's add the annotations by giving this a try::
-
-    python import-ann.py <blast database fasta file> summary-count.tsv > <output file>
-
-For example::
-
-    python import-ann.py nif-genes.fa summary-count.tsv > summary-count-annotated.tsv
-
-Task 20
--------
-Transfer the annotated file over to your laptop and open it in Excel.
-
-==========
-Conclusion
-==========
-
-You now have the foundation for having some sequencing data that you need to compare to any database.  You should be able to generate the information needed to perform statistical analyses.  Note, that you can do this for specific genes and also genomes...!    Now, go forth and conquer!
-
-
-====================================================
-Bonus Material on Genbank Files and Genome downloads
-====================================================
-
-Try modifying the fetch-genomes-fasta.py script to download just the Genbank file of the genes.
-
-Some comments on Genbank files:
-
-Download a bacterial genome's genbank file.
-
-Genbank files have a special structure to them.  You can look at it and figure it out for the most part, or read about it in detail `here <http://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html>`_.  To find out if your downloaded Genbank files contain 16S rRNA genes, I like to run the following command::
-
-    grep 16S *gbk
-
-This should look somewhat familiar from your shell lesson, but basically we're looking for anylines that contain the character "16S" in any Genbank file we've downloaded.  Note that you'll have to run this in the directory where you downloaded these files.
-
-The structure of the Genbank file allows you to identify 16S genes.  For example, ::
-
-         rRNA        9258..10759
-                     /gene="rrs"
-                     /locus_tag="CLK_3816"
-                     /product="16S ribosomal RNA"
-                     /db_xref="Pathema:CLK_3816"
-
-You could write code to find text like 'rRNA' and '/product="16S ribosomal RNA"', grab the location of the gene, and then go to the FASTA file and grab these sequences.  I've done that before.
-
-You could also use existing packages to parse Genbank files.  I have the most experience with BioPython.  To begin with, let's just use BioPython so you can get to using existing scripts without writing scripts.
-
-
-First, we'll have to install BioPython on your instance and they've made that pretty easy::
-
-    apt-get install python-biopython
-
-Fan Yang (Iowa State University) and I wrote a script to extract 16S rRNA sequences from Genbank files, `here <https://github.com/adina/tutorial-ngs-2014/blob/master/ncbi/parse-genbank.py>`_.  It basically searches for text strings in the Genbank structure that is appropriate for these particular genes.  You can read more about BioPython `here <http://biopython.org/DIST/docs/tutorial/Tutorial.html>`_ and its Genbank parser `here <http://biopython.org/DIST/docs/api/Bio.GenBank-module.html>`_.
-
-To run this script on the Genbank file for CP000962::
-
-    /usr/bin/python parse-genbank.py genbank-files/CP000962.gbk > genbank-files/CP000962.gbk.16S.fa
-
-The resulting output file contains all 16S rRNA genes from the given Genbank file.
-
-To run this for multiple files, I use a shell for loop::
-
-    for x in genbank-files/*; do /usr/bin/python parse-genbank.py $x > $x.16S.fa; done
-
-There are multiple ways to get this done -- but this is how I like to do it.
-
-And there you have it, you can now pretty much automatically grab 16S rRNA genes from any number of genomes in NCBI databases.
