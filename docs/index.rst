@@ -25,6 +25,8 @@ There three main tutorial sections:
    shell/index
 
 .. _fetch::
+
+.. toctree:
    :maxdepth: 2
    :caption: Fetching data from and API
 
