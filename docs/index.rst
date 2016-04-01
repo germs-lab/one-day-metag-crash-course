@@ -8,10 +8,26 @@ Welcome to Metagenomics One Day Crash Course!
 
 Contents:
 
-.. toctree::
-   :titlesonly: 
+These are the tutorials for a one day course I will teach at Cambridge University in April, 2016.  They are a merge of my perspective of what I wish someone would have showed me in less than 6 hours when I was a total newbie to metagenomic sequencing analysis.
 
-   intro/index
+There three main tutorial sections:
+
+* :ref:`shell`
+* :ref:`fetch`
+* :ref:`bioinfo`
+
+.. _shell:
+
+.. toctree::
+   :maxdepth: 2 
+   :caption: Shell documentation 
+
    shell/index
+
+.. _fetch:
+   :maxdepth: 2
+   :caption: Fetching data from and API
+
    fetch-data/index
+
 
