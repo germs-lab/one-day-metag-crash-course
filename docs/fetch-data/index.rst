@@ -22,33 +22,8 @@ The key challenge that we will work through...or your mission, if you choose to 
 
 You have been delivered three dogma-changing metagenomes (sequencing datasets) originating from three different Iowa crop soils (corn, soybean, and prairie).  You are interesting in identifying nitrogen fixation genes that are associated with native bacteria in these soils.  Nitrogen fixation is a natural process performed by bacteria that converts nitrogen in the atmosphere into a form that is usable for plants.  If we can optimize natural nitrogen fixation, our hope is to reduce nitrogen fertilizer inputs that may contribute to the eutrophication of downstream waters (e.g., dead zones in the Gulf of Mexico).
 
-Your tools
-----------
-
-Get your EC2 instance going - you need an Ubuntu 14.0 based instance (64-bit) with at least 4 cores.
-Then install the software::
-
-    sudo bash
-    apt-get update
-
-Then...::
-
-    cd /root
-    apt-get -y install gcc git screen curl make python-pip
-
-And finally...::
-
-    pip install screed
-    curl -O ftp://ftp.ncbi.nih.gov/blast/executables/release/2.2.26/blast-2.2.26-x64-linux.tar.gz
-    tar xzf blast-2.2.26-x64-linux.tar.gz
-    cp blast-2.2.26/bin/* /usr/local/bin
-    cd /home/ubuntu
-
-Getting the Data
+Getting the data
 ----------------
-
-Task 1
-------
 Get the metagenome datasets and scripts related to this tutorial.
 
 All the tutorial materials are contained on a Github repository.  The reason for using Github is that this material can be updated by me and grabbed by you lucky folk seamlessly with just a couple commands.  If you are interested in learning more about Git, see these [tutorials]()::
@@ -59,8 +34,8 @@ This command will make a directory (or folder for those more Finder/Explorer inc
 
     ls -lah
 
-Task 2
-------
+Understand the Data
+-------------------
 Navigate to the data directory and identify the number of sequences in each file.  Hint:  To find specific characters in a file, you can use [grep](http://www.gnu.org/software/grep/manual/html_node/Usage.html).  For example, to find all instances of AGTC in the corn.fa file, we could::
 
     grep AGTC corn.fa
@@ -77,57 +52,39 @@ Or...if you want to do this quicky::
 
     for x in *fa; do echo $x; grep ^">" $x | wc; done
 
-To identify nitrogen fixation genes, you've been tasked to build a database of all previously observed known nitrogen fixation genes (nifH).  To build this database, you have been reading literature for about two weeks and come up with a list of about 30 genes:
+Understand the gene of interest (based on a literature)
+-------------------------------------------------------
 
-gi|985477984|emb|LN997366.1|
+To identify nitrogen fixation genes, you've been tasked to build a database of all previously observed known nitrogen fixation genes (nifH).  To build this database, you have been reading literature for about two weeks and come up with a list of about 30 genes. You'll also see this list in a file in the data directory (hint:  use cat).
 
-gi|985477986|emb|LN997367.1|
-
-gi|985477988|emb|LN997368.1|
-
-gi|985477990|emb|LN997369.1|
-
-...
-
-gi|38679|emb|X51500.1|
-
-gi|470075|emb|Z31716.1|
-
-You'll also see this list in a file in the data directory (hint:  use cat).
-
-Task 3
-------
 Check out the file containing these gene IDs.
 
 You have a sinking feeling like this isn't really leveraging the big data biology that everyone says sequencing technologies have provided.  You've decided to check out NCBI for its contents.
 
-Task 4
-------
+Find more genes of interest (based on NCBI)
+-------------------------------------------
 Go to the NCBI webpage and identify an estimate of total nifH genes and download a list of their accession numbers.
 
 You'll want to navigate in a web-browser to the http://www.ncbi.nlm.nih.gov/.  You'll see in the search query box that you can search a number of databases.  Here, we want to look at the nucleotide database and query something along the lines of nifH or nitrogen fixation.
 
 When I did this, there were nearly 180,000 genes that were hit by this query.  You will want to look for the "Send To" link at the upper right of the page (put on a magnifying glass!), and download the GI list for this query.
 
-Task 5
-------
-Find that file on your computer and give it a peek.  If you're feeling up for it, transfer it to your EC2 instance (hint:  scp).
+Determine the list of genes to build a reference database
+---------------------------------------------------------
+Find that file on your computer and give it a peek.  
 
 To make this tutorial not-as-painful to complete in a reasonable amount of time, I've also made a list of 300 nifH genes from NCBI and put them in a file '300-nifh-genes.txt' in the data directory.  I would highly suggest you use this gene to build your database going forward in this tutorial.
 
-Task 6
-------
 Take a look at this file.  Prove to yourself that it contains 300 genes (Hint:  wc)
 
 .. Note::
 
     Some of these hits, I am sure, are likely not nifH.  Typically, I would do some clean up of these genes to filter out any annotation that did not contain "nifH".  In case you're interested, this script is in the scripts directory and is called "clean-up.py".  You are welcome to play with it.  Here's the command:  python clean-up.py <fasta-file-uncleaned> > <fasta-file-cleaned>
 
-
 Now, we are going to learn how to download these genes (by learning about the NCBI API below)
 
-Task 7
-------
+Download the associated sequence for genes
+------------------------------------------
 Think about how you would download this data if you didn't have this tutorial.
 
 You may have thought about some of the following:
@@ -138,9 +95,6 @@ You may have thought about some of the following:
 
 Among these, I'm going to assume many of you are familiar with the first two.  This tutorial then is going to focus on using APIs.
 
-================================
-Scaling "Getting the Data" On Up
-================================
 
 Here's some `answers <http://stackoverflow.com/questions/7440379/what-exactly-is-the-meaning-of-an-api>`_, among which my favorite is "an interface through which you access someone else's code or through which someone else's code accesses yours -- in effect the public methods and properties."
 
@@ -148,13 +102,9 @@ The NCBI has a whole toolkit which they call *Entrez Programming Utilities* or *
 
 To do this, you're going to be using one tool in *eutils*, called *efetch*.  There is a whole chapter devoted to `efetch <http://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch>`_ -- when I first started doing this kind of work, this documentation always broke my heart.  Its easier for me to just show you how to use it.
 
-Task 8
-------
-
+Understanding NCBI's API
+------------------------
 Open a web browser, and check out what NCBI knows about this gene.  Check it out `here <http://www.ncbi.nlm.nih.gov/nuccore/X51500.1>`_.
-
-Task 9
-------
 
 Download the gene with eutils commands in your web-browser and take a look at the file.
 
@@ -162,8 +112,8 @@ On your web-browser, paste the following URL to download the nucleotide genome f
 
     http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=X51500.1&rettype=fasta&retmode=text
 
-Task 10
--------
+Bringing this to the command line
+---------------------------------
 
 Try downloading the GenBank file instead by pasting this onto your web-browser::
 
@@ -185,8 +135,6 @@ Also, a useful command is also <version=1>.  There are different versions of seq
 
 Ok, let's think of automating this sort of query.  So...we're moving from your lil laptop to your jumbo EC2 instance now.
 
-Task 11
--------
 Download a gene sequence on the command line.
 
 Going back onto your instance, in the shell, you could run the same commands above with the addition of *curl* on your EC2 instance::
@@ -205,8 +153,8 @@ To see the documentation for this script in the scripts directory::
 
 You'll see that you need to provide a list of IDs and a directory where you want to save the downloaded files.
 
-Task 12a
---------
+Scaling up sequencing downloading from a list
+---------------------------------------------
 
 Run this script (note that your paths for the script or data may need to be specified) -- also see note below::
 
@@ -218,12 +166,12 @@ Sit back and think of the glory that is happening on your screen right now...
 
     If you are nervous....you may want to run this on just a few of these IDs to begin with.  You can create a smaller list using the *head* command with the -n parameter in the shell.  For example, head -n 3 300-nifh-genes.txt > 3genes.txt.
 
-Task 12b
---------
+Build your giant database
+-------------------------
 After all the 300 genes are downloaded, you will want to concatenate them into one file (Hint cat and >>), named "all-nifH.fa".
 
-Task 13
--------
+Under the hood
+--------------
 Look at the script/program content in "fetch-genomes-fasta.py".
 
 The meat of this script uses the following code::
@@ -232,6 +180,3 @@ The meat of this script uses the following code::
 
 You'll see that the *id* here is a string character which is obtained from list of IDs contained in a separate file.  The rest of the script manages where the files are being placed and what they are named.  It also prints some output to the screen so you know its running.
 
-Task 14
--------
-Take a break.   Put up your pink stickie if you need help with this.
