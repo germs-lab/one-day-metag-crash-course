@@ -10,7 +10,7 @@ Contents:
 
 These are the tutorials for a one day course I will teach at Cambridge University in April, 2016.  They are a merge of my perspective of what I wish someone would have showed me in less than 6 hours when I was a total newbie to metagenomic sequencing analysis.
 
-There three main tutorial sections:
+Three main tutorial sections:
 -----------------------------------
 * :ref:`Unix Shell <shell>`
 * :ref:`Getting data <fetch-data>`
