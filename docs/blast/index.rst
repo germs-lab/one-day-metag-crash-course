@@ -45,7 +45,7 @@ You'll see a BLAST output print to the screen really fast.  To save it, you can 
 
     blastn -query metags/corn.fa -db nifh-ref.fa -out metags/corn.fa.x.nifh.blastnout.txt
 
-Maybe you don't want to see all the alignments but would rather have a tabular output.  You can check out how to do this <`in the manual `<http://www.ncbi.nlm.nih.gov/books/NBK279675/>`_ and with the command::
+Maybe you don't want to see all the alignments but would rather have a tabular output.  You can check out how to do this `in the manual <http://www.ncbi.nlm.nih.gov/books/NBK279675/>`_ and with the command::
 
     blastn -query metags/corn.fa -db nifh-ref.fa -out metags/corn.fa.x.nifh.blastnout.tsv -outfmt 6
  
