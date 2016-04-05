@@ -1,5 +1,5 @@
-Fetching Data with the NCBI API
-===============================
+Running a bioinformatic program
+================================
 
 
 Learning objectives
