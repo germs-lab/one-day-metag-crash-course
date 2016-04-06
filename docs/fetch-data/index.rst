@@ -180,3 +180,7 @@ The meat of this script uses the following code::
 
 You'll see that the *id* here is a string character which is obtained from list of IDs contained in a separate file.  The rest of the script manages where the files are being placed and what they are named.  It also prints some output to the screen so you know its running.
 
+A challenge exercise
+--------------------
+
+You've downloaded all the fasta files from a list.  Modify the script to now download genbank files for a list of genomes of interest (not nifH -- genomes!, you can pick a phyla and download say 100 genomes IDs).  Using shell commands you have learned in the past, can you count the number of 16S rRNA genes that are present in the file?  Can you print out a list of all genes contained within the genomes?  Note that you'll have to understand what genbank information is contained in a file.  
