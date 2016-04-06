@@ -16,6 +16,14 @@ Three main tutorial sections:
 * :ref:`Getting data <fetch-data>`
 * :ref:`Running a program <blast>`
 
+Resources:
+
+`Practical Computing for Biologist <http://www.amazon.com/Practical-Computing-Biologists-Steven-Haddock/dp/0878933913/ref=sr_1_sc_1>`_
+
+`Bioinformatics Programming with Python <http://www.amazon.com/Bioinformatics-Programming-Using-Python-Biological/dp/059615450X/ref=sr_1_3>`_
+
+`Effective Computation in Physics <http://shop.oreilly.com/product/0636920033424.do>`_
+
 .. _shell:
 
 .. toctree::
