@@ -1,250 +1,226 @@
-Introduction to the shell
-=========================
+The Shell
 
---------------
+**Original Material by Milad Fatenejad, Sasha Wood, and Radhika
+Khetani**
 
-Authored by Tracy Teal with `Software
-Carpentry <http://software-carpentry.org/lessons.html>`__, with minor
-modifications by Ashley Shade, Joshua Herr, and Paul Wilburn
-`EDAMAME-2015
-wiki <https://github.com/edamame-course/2015-tutorials/wiki>`__
+**Modified by Jared Flater and Adina Howe**
 
---------------
+Exercise solutions have been posted as an ipython notebook.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-| Software Carpentry has a CC-BY
-  `license <https://github.com/swcarpentry/shell-novice/blob/gh-pages/LICENSE.md>`__
-| EDAMAME tutorials have a CC-BY
-  `license <https://github.com/edamame-course/2015-tutorials/blob/master/LICENSE.md>`__.
-| *Share, adapt, and attribute please!*
-| \*\*\*
+You can view `solutions
+here <https://nbviewer.jupyter.org/github/germs-lab/softwarecarpentry/blob/master/day1.shell/exercise_solutions.ipynb>`__
 
-Overarching Goal
-----------------
-
--  This tutorial will contribute towards developing of **computing
-   literacy**
-
-Learning Objectives
--------------------
-
--  Understand what the shell is, how to access it from your computer,
-   and how to use it.
--  Navigate around a Unix file system to view and manipulate files
-
---------------
-
-Using The Shell
----------------
-
-Objectives
-----------
-
--  What is the shell?
--  How do you access it?
--  How do you use it?
--  Getting around the Unix file system
--  looking at files
--  manipulating files
--  automating tasks
--  What is the Shell good for?
--  Where are resources where I can learn more? (because the shell is
-   awesome)
-
-What is the shell?
-------------------
+What is the shell how do I access the shell?
+============================================
 
 The *shell* is a program that presents a command line interface which
 allows you to control your computer using commands entered with a
 keyboard instead of controlling graphical user interfaces (GUIs) with a
 mouse/keyboard combination.
 
-There are many reasons to learn about the shell.
-
--  For most bioinformatics tools, you have to use the shell. There is no
-   graphical interface. If you want to work in metagenomics or genomics
-   you're going to need to use the shell.
--  The shell gives you *power*. The command line gives you the power to
-   do your work more efficiently and more quickly. When you need to do
-   things tens to hundreds of times, knowing how to use the shell is
-   transformative.
--  To use remote computers or cloud computing, you need to use the
-   shell.
--  We're going to use it in this class, for all of the reasons above.
-
-.. figure:: https://raw.githubusercontent.com/edamame-course/data/master/shell/gvng.jpg
-
-
-   Automation
-
-Unix is user-friendly. It's just very selective about who its friends
-are.
-
-Today we're going to go through how to access Unix/Linux and some of the
-basic shell commands.
-
-Information on the shell
-------------------------
-
-Here are some great shell cheat sheets:
-- `Unix-Linux Command Cheat Sheet <http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/>`__
-- `Software Carpentry Cheat Sheet <https://github.com/swcarpentry/boot-camps/blob/master/shell/shell_cheatsheet.md>`__
-- `Explain shell <http://explainshell.com>`__ - a web site where you can see what the different components of a shell command are doing.
-- `commandlinefu <http://www.commandlinefu.com>`__
-
-How to access the shell
------------------------
-
-The shell is already available on Mac and Linux. For Windows, you'll
-have to download a separate program.
-
-Mac
----
-
-On Mac the shell is available through Terminal *Applications ->
-Utilities -> Terminal* Go ahead and drag the Terminal application to
-your Dock for easy access.
-
-Windows
--------
-
-For Windows, we're going to be using MobaXTerm. Download and install
-`MobaXterm <http://mobaxterm.mobatek.net/>`__ Open up the program.
-
-Linux
------
-
-Well, you should be set if you're already using Linux
-
-Preliminaries
--------------
-
-We will spend most of our time using the shell to manipulate example
-data files.
-
-Open your browser. In the address bar, enter
+You can access the repository for this tutorial, hosted on github:
 
 ::
 
-    https://s3.amazonaws.com/edamame/EDAMAME_16S.tar.gz
+    https://github.com/germs-lab/Shell_Tutorial
 
-Create a folder named ``tutorial_shell`` and place the
-EDAMAME\_16S.tar.gz file there. We'll come back to it using the shell in
-just a minute.
+Or view the tutorial as a webpage here:
+
+::
+
+    http://germslab.org/Shell_Tutorial/
+
+Access via Terminal
+===================
+
+A *terminal* is a program you run that gives you access to the shell.
+There are many different terminal programs that vary across operating
+systems.
+
+There are many reasons to learn about the shell. In our opinion, the
+most important reasons are that:
+
+1. It is very common to encounter the shell and command-line-interfaces
+   in scientific computing, so you will probably have to learn it
+   eventually
+
+2. The shell is a really powerful way of interacting with your computer.
+   GUIs and the shell are complementary - by knowing both you will
+   greatly expand the range of tasks you can accomplish with your
+   computer. You will also be able to perform many tasks more
+   efficiently.
+
+The shell is just a program and there are many different shell programs
+that have been developed. The most common shell (and the one we will
+use) is called the Bourne-Again SHell (bash). Even if bash is not the
+default shell, it is usually installed on most systems and can be
+started by typing ``bash`` in the terminal. Many commands, especially a
+lot of the basic ones, work across the various shells but many things
+are different. I recommend sticking with bash and learning it well.
+
+`Here is a link for more
+information <https://en.wikipedia.org/wiki/Bash_(Unix_shell)>`__
+
+To open a terminal
+~~~~~~~~~~~~~~~~~~
+
+Mac: single click terminal icon or push ``cmd + spacebar`` and start
+typing "terminal"
+
+Windows: Download and install `Putty <http://www.putty.org>`__ or
+`MobaXterm <http://mobaxterm.mobatek.net/download-home-edition.html>`__
+
+The Example: Manipulating Experimental Data Files
+=================================================
+
+We will spend most of our time learning about the basics of the shell by
+manipulating some experimental data from a hearing test. To get the data
+for this test, you will need internet access. Just enter the command:
+
+::
+
+    git clone https://github.com/germs-lab/Shell_Tutorial
+
+Followed by:
+
+::
+
+    cd Shell_Tutorial 
+
+This command downloads all the data that will be needed for this
+tutorial.
+
+Let's get started
+=================
+
+One very basic command is ``echo``. This command just prints text to the
+terminal. Try the command:
+
+::
+
+    echo Hello, World
+
+Then press enter. You should see the text "Hello, World" printed back to
+you. The echo command is useful for printing from a shell script, for
+displaying variables, and for generating known values to pass to other
+programs.
 
 Moving around the file system
 -----------------------------
 
-Let's practice moving around a bit.
+Let's learn how to move around the file system using command line
+programs. This is really easy to do using a GUI (just click on things).
+Once you learn the basic commands, you'll see that it is really easy to
+do in the shell too.
 
-We're going to work in that ``tutorial_shell`` you just created.
+First we have to know where we are. The program ``pwd`` (print working
+directory) tells you where you are sitting in the directory tree. The
+command ``ls`` will list the files in files in the current directory.
+Directories are often called "folders" because of how they are
+represented in GUIs. Directories are just listings of files. They can
+contain other files or directories.
 
-Let's navigate there using the regular way by clicking on the different
-folders.
-
-First we did something like go to the folder of our username. Then we
-clicked on an n number of directories then eventually 'tutorial\_shell'
-
-Let's draw out how that went.
-
-Now let's draw some of the other files and folders we could have clicked
-on.
-
-This is called a hierarchical file system structure, like an upside down
-tree with root (/) at the base that looks like this.
-
-.. figure:: https://raw.githubusercontent.com/edamame-course/2014-tutorials/master/img/shell/Slide1.jpg
-   :alt: Unix
-
-   Unix
-
-That (/) at the base is often also called the 'top' level.
-
-When you are working at your computer or log in to a remote computer,
-you are on one of the branches of that tree, your home directory
-(/home/username)
-
-Now let's go do that same navigation at the command line.
-
-Open The Shell
-
-Congrats! You are in the home directory. Just to be sure, let's type:
-
-::
-
-    cd
-
-This command will always place you home.
-
-This directory should have some other folders, perhaps files and/or
-programs. Let's check. Type:
-
-::
-
-    ls
-
-``ls`` stands for 'list' and it lists the contents of a directory.
-
-Oftentimes, a directory will have a mix of objects. If we want to know
-which is which, we can type:
-
-::
-
-    ls -F
-
-Anything with a "/" after it is a directory. Things with a "\*" after
-them are programs. It there's nothing there it's a file.
-
-You can also use the command ``ls -l`` to see whether items in a
-directory are files or directories. ``ls -l`` gives a lot more
-information too, such as the size of the file
-
-As you are seeing the list of directories in the ``home`` folder, pick
-one and type:
-
-::
-
-    cd <name of directory>
-
-You have just entered a lower level directory of your choice. Check out
-its contents by typing:
-
-::
-
-    ls
-
-To go 'back up a level' we need to use ``..``
-
-Type:
-
-::
-
-    cd ..
-
-Sometimes when we're wandering around in the file system, it's easy to
-lose track of where we are and get lost.
-
-If you want to know what directory you're currently in, type:
+Use ``pwd`` to find out what your current working directory is
 
 ::
 
     pwd
 
-This stands for 'print working directory'. The directory you're
-currently working in.
+Lets navigate to our home directory and look at the contents using
+``cd`` and ``ls``
 
-We are ready. Using ``cd <directory>``, ``ls`` and (optionally) ``pwd``,
-to the ``tutorial_shell`` directory and list its contents. Remember, if
-you get lost, going home is easy with ``cd`` by itself.
+::
 
-Good work. You can now move around in different directories or folders
-at the command line. Why would you want to do this, rather than just
-navigating around the normal way?
+    cd
+    ls    
 
-When you're working with bioinformatics programs, you're working with
-your data and it's key to be able to have that data in the right place
-and make sure the program has access to the data. Many of the problems
-people run into with command line bioinformatics programs result from
-not having the data in the place the program expects it to be.
+Note\ * *\ When you start up a terminal, you will start in a special
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+directory called the home directory.\*
+
+Every user has their own home directory where they have full access to
+do whatever they want.
+
+**File Types**
+
+When you enter the ``ls`` command lists the contents of the current
+directory. There are several items in the home directory, notice that
+some of them are files and some of them are directories.
+
+Lets create an empty file using the ``touch`` command. Enter the
+command:
+
+::
+
+    touch testfile
+
+Then list the contents of the directory again. You should see that a new
+entry, called ``testfile``, exists. The ``touch`` command just creates
+an empty file.
+
+Some terminals will color the directory entries in this very convenient
+way. Another way you can display direcories is by using ``ls -F``
+instead of ``ls``. The ``-F`` argument modifies the results so that a
+slash is placed at the end of directories. If the file is *executable*
+meaning that it can be run like a program, then a star will be placed at
+the end of of the file name.
+
+::
+
+    ls -F
+
+You can also use the command ``ls -l`` to see whether items in a
+directory are files or directories. ``ls -l`` gives a lot more
+information too, such as the size of the file and information about the
+owner. If the entry is a directory, then the first letter will be a "d".
+The fifth column shows you the size of the entries in bytes. Notice that
+``testfile`` has a size of zero.
+
+::
+
+    ls -l
+
+Now, let's get rid of ``testfile``. To remove a file, just enter the
+command:
+
+::
+
+    rm testfile
+
+The ``rm`` command can be used to remove files. If you enter ``ls``
+again, you will see that ``testfile`` is gone.
+
+**Changing Directories**
+
+Now, let's move to a different directory. Right now, we are in the
+``Shell_Tutorial`` directory which is in home directory. You can see
+this with the command ``pwd``. The command ``cd`` (change directory) is
+used to move around. Let's move into the home directory.
+
+Enter the following command:
+
+::
+
+    cd ~
+
+Now, let's move back into the ``Shell_Tutorial`` directory:
+
+::
+
+    cd Shell_Tutorial
+
+Now use the ``ls`` command to see what is inside this directory. This
+directory contains all of the material for this boot camp. Now move to
+the directory containing the data for the shell tutorial:
+
+::
+
+    cd data
+
+If you enter the ``cd`` command by itself, you will return to the home
+directory. Try this, and then navigate back to the ``shell`` directory.
 
 Arguments
 ---------
@@ -261,132 +237,38 @@ manual using the ``man`` program. Try entering:
 
     man ls
 
-This will open the manual page for ``ls``. Use the space key to go
-forward and b to go backwards. When you are done reading, just hit ``q``
-to quit.
+This will open the manual page for ``ls``. Use the ``space`` key to go
+forward and ``b`` to go backwards, ``j`` and ``k`` will move you one
+line up and down, respectively. When you are done reading, just hit
+``q`` to exit.
 
 Programs that are run from the shell can get extremely complicated. To
-see an example, open up the manual page for the ``find`` program. No one
-can possibly learn all of these arguments, of course. So you will
-probably find yourself referring back to the manual page frequently.
+see an example, open up the manual page for the ``find`` program, which
+we will use later this session. No one can possibly learn all of these
+arguments, of course. So you will probably find yourself referring back
+to the manual page frequently.
 
-Examining the contents of other directories
--------------------------------------------
+**Examining the contents of other directories**
 
-By default, the ``ls`` command lists the contents of the working
+By default, the ``ls`` commands lists the contents of the working
 directory (i.e. the directory you are in). You can always find the
 directory you are in using the ``pwd`` command. However, you can also
-give ``ls`` the names of other directories to view. Navigate to the
-``tutorial_shell`` directory if you are not already there.
-
-Type:
+give ``ls`` the names of other directories to view. Navigate to the home
+directory if you are not already there. Then enter the command:
 
 ::
 
-    cd ..
-
-Then enter the command:
-
-::
-
-    ls tutorial_shell
-
-This will list the contents of the ``tutorial_shell`` directory without
-you having to navigate there.
-
-The ``cd`` command works in a similar way. Using ``cd ..`` twice,
-navigate two levels higher than ``tutorial_shell``. Now navigate back to
-tutorial shell in one line of code that looks something like:
-
-::
-
-    cd <directory_1>/<directory_2>/tutorial_shell
-
-and you will jump directly to ``tutorial_shell`` without having to go
-through the intermediates.
-
-Full vs. Relative Paths
------------------------
-
-The ``cd`` command takes an argument which is the directory name.
-Directories can be specified using either a *relative* path or a full
-*path*. The directories on the computer are arranged into a hierarchy.
-The full path tells you where a directory is in that hierarchy. Navigate
-to the home directory. Now, enter the ``pwd`` command and you should
-see:
-
-::
-
-    /home/<username>
-
-which is the full name of your home directory. This tells you that you
-are in a directory called ``<username>``, which sits inside a directory
-called ``home`` which sits inside the very top directory in the
-hierarchy. The very top of the hierarchy is a directory called ``/``
-which is usually referred to as the *root directory*. So, to summarize:
-``<username>`` is a directory in ``home`` which is a directory in ``/``.
-
-Let's try an exercise. Navigate to the ``tutorial_shell`` directory if
-you are not already there.
-
-Check where you are with ``pwd``. The output should look something like
-``/home/<username>/.../tutorial_shell`` Copy the entire output. Next, go
-to the home directory with ``cd``. Once in home directory, type:
-
-::
-
-    cd <pwd output>
-
-This jumps back to the ``tutorial_shell``.
-
-Now go back to the home directory again with ``cd``. Once in home
-directory, type ``cd`` plus the output of pwd minus the
-``/home/<username>``
-
-The reduced command had the same effect - it took us to the
-``tutorial_shell`` directory. But, instead of specifying the *full
-path*, which starts with the root directory ``/``, we specified a
-*relative path*. In other words, we specified the path relative to our
-current directory. A full path always starts with a ``/``. A relative
-path does not.
-
-A relative path is like getting directions from someone on the street.
-They tell you to "go right at the Stop sign, and then turn left on Main
-Street". That works great if you're standing there together, but not so
-well if you're trying to tell someone how to get there from another
-country. A full path is like GPS coordinates. It tells you exactly where
-something is no matter where you are right now.
-
-You can usually use either a full path or a relative path depending on
-what is most convenient. If we are in the home directory, it is more
-convenient to just enter the relative path since it involves less
-typing.
-
-Over time, it will become easier for you to keep a mental note of the
-structure of the directories that you are using and how to quickly
-navigate amongst them.
-
---------------
-
-**Short Exercise**
-
-Now, list the contents of the /bin directory. Do you see anything
-familiar in there?
-
---------------
+    ls /home/p3-training/Shell_Tutorial/ 
 
 Saving time with shortcuts, wild cards, and tab completion
 ----------------------------------------------------------
 
-Shortcuts
-~~~~~~~~~
+**Shortcuts**
 
 There are some shortcuts which you should know about. Dealing with the
 home directory is very common. So, in the shell the tilde character,
 ``~``, is a shortcut for your home directory. Navigate to the
-``tutorial_shell`` directory:
-
-Then enter the command:
+``Shell_Tutorial`` directory, then enter the command:
 
 ::
 
@@ -400,94 +282,82 @@ above your current directory. Thus:
 
     ls ..
 
-prints the contents of the directory one level higher than
-``tutorial_shell``. You can chain these together, so:
+prints the contents of the ``/home/p3-training/`` directory. You can
+chain these together, so:
 
 ::
 
     ls ../../
 
-prints the contents of two levels higher than ``tutorial_shell``.
-Finally, the special directory ``.`` always refers to your current
-directory. So, ``ls``, ``ls .``, and ``ls ././././.`` all do the same
-thing, they print the contents of the current directory. This may seem
-like a useless shortcut right now, but we'll see when it is needed in a
-little while.
+prints the contents of ``/home/`` which is your root directory. Finally,
+the special directory ``.`` always refers to your current directory. So,
+``ls``, ``ls .``, and ``ls ././././.`` all do the same thing, they print
+the contents of the current directory. This may seem like a useless
+shortcut right now, but we'll see when it is needed in a little while.
 
-To summarize, while you are in the ``shell`` directory, the commands
-``ls ~``, ``ls ~/.``, ``ls ../../``, and ``ls /home/username`` all do
-exactly the same thing. These shortcuts are not necessary, they are
-provided for your convenience.
+To summarize, the commands ``ls ~``, ``ls ~/.``, ``ls ../../``, and
+``ls /home/p3-training/Shell_Tutorial/`` all do exactly the same thing.
+These shortcuts are not necessary, they are provided for your
+convenience.
 
-Our data set: FASTQ files
-~~~~~~~~~~~~~~~~~~~~~~~~~
+**Our data set: Cochlear Implants**
 
-We did an experiment and want to look at the bacterial communities a
-soil chronosequence using 16S sequencing. We get our data back from the
-sequencing center as FASTQ files, and we stick them all in a folder
-called MiSeq. This data is actually the data we're going to use for
-several sections of the course, and it's data generated by the Shade Lab
-at Michigan State.
+A cochlear implant is a small electronic device that is surgically
+implanted in the inner ear to give deaf people a sense of hearing. More
+than a quarter of a million people have them, but there is still no
+widely-accepted benchmark to measure their effectiveness. In order to
+establish a baseline for such a benchmark, our supervisor got teenagers
+with CIs to listen to audio files on their computer and report:
 
-We want to be able to look at these files and do some things with them.
+1. the quietest sound they could hear
+2. the lowest and highest tones they could hear
+3. the narrowest range of frequencies they could discriminate
 
-First, let's extract the archive we have in ``tutorial_shell``. Once in
-this directory, type:
+To participate, subjects attended our laboratory and one of our lab
+techs played an audio sample, and recorded their data - when they first
+heard the sound, or first heard a difference in the sound. Each set of
+test results were written out to a text file, one set per file. Each
+participant has a unique subject ID, and a made-up subject name. Each
+experiment has a unique experiment ID. The experiment has collected 351
+files so far.
 
-::
+**Wild cards**
 
-    tar -xzvf EDAMAME_16S.tar.gz
-
-Done!
-
-Wild cards
-~~~~~~~~~~
-
-Navigate to the ``tutorial_shell/EDAMAME_16S/Fastq`` directory. This
-directory some of our FASTQ files we'll need for analyses. If we type
-``ls``, we will see that there are a bunch of files with long file
-names. Some of the end with .fastq
-
+Navigate to the ``~/Shell_Tutorial/data/THOMAS`` directory. This
+directory contains our hearing test data for THOMAS. If we type ``ls``,
+we will see that there are a bunch of files which are just four digit
+numbers. By default, ``ls`` lists all of the files in a given directory.
 The ``*`` character is a shortcut for "everything". Thus, if you enter
 ``ls *``, you will see all of the contents of a given directory. Now try
 this command:
 
 ::
 
-    ls *fastq
+    ls *1
 
-This lists every file that ends with a ``fastq``. This command:
-
-::
-
-    ls /usr/bin/*.sh
-
-Lists every file in ``/usr/bin`` that ends in the characters ``.sh``.
-
-We have paired end sequencing, so for every sample we have two files. If
-we want to just see the list of the files for the forward direction
-sequencing we can use:
+And this command
 
 ::
 
-    ls *F*fastq
+    ls *4*1
 
-lists every file in the current directory whose name contains the letter
-``F``, and ends with ``fastq``.
+lists every file in the current directory which contains the number
+``4``, and ends with the number ``1``. There are four such files:
+``0241``, ``0341``, ``0431``, and ``0481``.
 
 So how does this actually work? Well...when the shell (bash) sees a word
-that contains the ``\*`` character, it automatically looks for filenames
-that match the given pattern. In this case, it identified four such
-files. Then, it replaced the ``*F*fastq`` with the list of files,
-separated by spaces. In other words, the two commands:
+that contains the ``*`` character, it automatically looks for files that
+match the given pattern. In this case, it identified four such files.
+Then, it replaced the ``*4*1`` with the list of files, separated by
+spaces. In other words, the two commands:
 
 ::
 
-    ls *F*fastq
-    ls C01D01F_sub.fastq    C01D02F_sub.fastq   C01D03F_sub.fastq
+    ls *4*1
+    ls 0241 0341 0431 0481
 
-are exactly identical. The ``ls`` command cannot tell the difference
-between these two things.
+are identical. The ``ls`` command cannot tell the difference between
+these two things.
 
 --------------
 
@@ -496,17 +366,14 @@ between these two things.
 Do each of the following using a single ``ls`` command without
 navigating to a different directory.
 
-1. List all of the files in ``/bin`` that start with the letter 'c
-2. List all of the files in ``/bin`` that contain the letter 'a'
-3. List all of the files in ``/bin`` that end with the letter 'o'
-
-BONUS: List all of the files in '/bin' that contain the letter 'a' or
-'c'
+1. List all of the files in the data directory ``gerdal`` that contain
+   the number ``2``
+2. List all of the files in that contain the number ``2``, followed by
+   the number (in any position) ``9``
 
 --------------
 
-Tab Completion
-~~~~~~~~~~~~~~
+**Tab Completion**
 
 Navigate to the home directory. Typing out directory names can waste a
 lot of time. When you start typing out the name of a directory, then hit
@@ -515,32 +382,30 @@ name. For example, enter:
 
 ::
 
-    cd <someletter><tab>
+    cd s<tab>
 
-The shell will fill in the rest of the directory name.
-
-Now go to ``tutorial_shell/EDAMAME_16S/Fastq``
+The shell will fill in the rest of the directory name for
+``Shell_Tutorial``. Now enter:
 
 ::
 
-    ls C<tab><tab>
+    ls ~/Shell_Tutorial/ex<tab><tab>
 
-When you hit the first tab, the name is partially filled in. The reason
-is that there are multiple directories in the home directory which start
-with ``C01D0``. Thus, the shell does not know which one to fill in. When
-you hit tab again, the shell will list the possible choices.
+When you hit the first tab, nothing happens. The reason is that there
+are multiple directories in the home directory which start with e. Thus,
+the shell does not know which one to fill in. When you hit tab again,
+the shell will list the possible choices.
 
 Tab completion can also fill in the names of programs. For example,
 enter ``e<tab><tab>``. You will see the name of every program that
 starts with an ``e``. One of those is ``echo``. If you enter ``ec<tab>``
 you will see that tab completion works.
 
-Command History
----------------
+**Command History**
 
-You can easily access previous commands. Hit the up arrow. Hit it again.
-You can step backwards through your command history. The down arrow
-takes your forwards in the command history.
+| You can easily access previous commands. Hit the up arrow.
+| Hit it again. You can step backwards through your command history. The
+  down arrow takes your forwards in the command history.
 
 ^-C will cancel the command you are writing, and give you a fresh
 prompt.
@@ -548,383 +413,8 @@ prompt.
 ^-R will do a reverse-search through your command history. This is very
 useful.
 
-You can also review your recent commands with the ``history`` command.
-Just enter:
-
-::
-
-    history
-
-to see a numbered list of recent commands, including this just issues
-``history`` command. You can reuse one of these commands directly by
-referring to the number of that command.
-
-If your history looked like this:
-
-::
-
-    259  ls *
-    260  ls /usr/bin/*.sh
-    261  ls *F*fastq
-
-then you could repeat command #260 by simply entering:
-
-::
-
-    !260
-
-(that's an exclamation mark by the way).
-
+Which program?
 --------------
-
-**Short Exercise**
-
-1. Find the line number in your history for the last exercise (listing
-   files in /bin) and reissue that command.
-
---------------
-
-Examining Files
----------------
-
-We now know how to switch directories, run programs, and look at the
-contents of directories, but how do we look at the contents of files?
-
-The easiest way to examine a file is to just print out all of the
-contents using the program ``cat``. Enter the following command:
-
-::
-
-    cat C01D01R_sub.fastq
-
-This prints out the contents of the ``C01D01R_sub.fastq`` file.
-
---------------
-
-**Short Exercises**
-
-1. Print out the contents of the
-   ``tutorial_shell/EDAMAME_16S/MappingFiles/Centralia_Full_Map.txt``
-   file. What does this file contain?
-
-2. Without changing directories, (you should still be in
-   ``edamame-data``), use one short command to print the contents of all
-   of the files in the ``tutorial_shell/EDAMAME_16S/Fastq`` directory.
-
---------------
-
-Make sure we're in the right place for the next set of the lessons. We
-want to be in the ``tutorial_shell/EDAMAME_16S/Fastq`` directory. Check
-if you're there with ``pwd`` and if not navigate there.
-
-``cat`` is a terrific program, but when the file is really big, it can
-be annoying to use. The program, ``less``, is useful for this case.
-Enter the following command:
-
-::
-
-    less C01D01R_sub.fastq
-
-``less`` opens the file, and lets you navigate through it. The commands
-are identical to the ``man`` program. To quit ``less`` and go back to
-the shell, press ``q``.
-
-**Some commands in ``less``**
-
-+-----------+--------------------------+
-| key       | action                   |
-+===========+==========================+
-| "space"   | to go forward            |
-+-----------+--------------------------+
-| "b"       | to go backwarsd          |
-+-----------+--------------------------+
-| "g"       | to go to the beginning   |
-+-----------+--------------------------+
-| "G"       | to go to the end         |
-+-----------+--------------------------+
-| "q"       | to quit                  |
-+-----------+--------------------------+
-
-``less`` also gives you a way of searching through files. Just hit the
-"/" key to begin a search. Enter the name of the word you would like to
-search for and hit enter. It will jump to the next location where that
-word is found. If you hit "/" then "enter", ``less`` will just repeat
-the previous search. ``less`` searches from the current location and
-works its way forward. If you are at the end of the file and search for
-the word that does not exist from that point forward, ``less`` will not
-find it. You need to go to the beginning of the file and search.
-
-For instance, let's search for the sequence
-``HWI-M03127:41:ACE13:1:1114:22908:11882`` in our file. You can see that
-we go right to that sequence and can see what it looks like.
-
-Remember, the ``man`` program actually uses ``less`` internally and
-therefore uses the same commands, so you can search documentation using
-"/" as well!
-
-There's another way that we can look at files, and in this case, just
-look at part of them. This can be particularly useful if we just want to
-see the beginning or end of the file, or see how it's formatted.
-
-The commands are ``head`` and ``tail`` and they just let you look at the
-beginning and end of a file respectively.
-
-::
-
-    head C01D01R_sub.fastq
-    tail C01D01R_sub.fastq
-
-The ``-n`` option to either of these commands can be used to print the
-first or last ``n`` lines of a file. To print the first/last line of the
-file use:
-
-::
-
-    head -n 1 C01D01R_sub.fastq
-    tail -n 1 C01D01R_sub.fastq
-
-Searching files
----------------
-
-We showed a little how to search within a file using ``less``. We can
-also search within files without even opening them, using ``grep``. Grep
-is a command-line utility for searching plain-text data sets for lines
-matching a string or regular expression. Let's give it a try!
-
-Let's search for that sequence ACE13:1:2109:11596: in the
-C01D01R\_sub.fastq file.
-
-::
-
-    grep ACE13:1:2109:11596 C01D01R_sub.fastq
-
-We get back the whole line that had '1101:14341' in it. What if we
-wanted all four lines, the whole part of that FASTQ sequence, back
-instead.
-
-::
-
-    grep -A 3 ACE13:1:2109:11596 C01D01R_sub.fastq
-
-The ``-A`` flag stands for "after match" so it's returning the line that
-matches plus the three after it. The ``-B`` flag returns that number of
-lines before the match.
-
---------------
-
-\*\* Exercise \*\*
-
-Search for the sequence ``CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA`` in the
-``C01D01R_sub.fastq`` file and in the output have the sequence name and
-the sequence. e.g.
-
-::
-
-    @HWI-M03127:41:ACE13:1:1114:14857:17361 2:N:0:GGAGACAAGGGA
-    CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCAGTATCTGCCCAGGTCGCCGCCTT
-
-Search for that sequence in all the FASTQ files. \*\*\*\*
-
-Redirection
------------
-
-We're excited we have all these sequences that we care about that we
-just got from the FASTQ files. That is a really important motif that is
-going to help us answer our important question. But all those sequences
-just went whizzing by with grep. How can we capture them?
-
-We can do that with something called "redirection". The idea is that
-we're redirecting the output to the terminal (all the stuff that went
-whizzing by) to something else. In this case, we want to print it to a
-file, so that we can look at it later.
-
-The redirection command for putting something in a file is ``>``
-
-Let's try it out and put all the sequences that contain
-'CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA' from all the files in to another
-file called 'good-data.txt'
-
-::
-
-    grep -B 2 CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA * > good-data.txt
-
-The above code makes use of the ``*`` wilcard to search *ALL* of the
-files in your current directory for the sequence. The ``>`` here says to
-write the results from the ``grep`` command we just ran to a new file
-called good-data.txt The prompt should sit there a little bit, and then
-it should look like nothing happened. But type ``ls``. You should have a
-new file called good-data.txt. Take a look at it and see if it has what
-you think it should.
-
-There's one more useful redirection command that we're going to show,
-and that's called the pipe command, and it is ``|``. It's probably not a
-key on your keyboard you use very much. What ``|`` does is take the
-output that scrolling by on the terminal and then can run it through
-another command. When it was all whizzing by before, we wished we could
-just slow it down and look at it, like we can with ``less``. Well it
-turns out that we can! We pipe the ``grep`` command through ``less``.
-
-::
-
-    grep CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA * | less
-
-Now we can use the arrows to scroll up and down and use ``q`` to get
-out.
-
-We can also do something tricky and use the command ``wc``. ``wc``
-stands for ``word count``. It counts the number of lines or characters.
-So, we can use it to count the number of lines we're getting back from
-our ``grep`` command. And that will magically tell us how many sequences
-we're finding. We're
-
-::
-
-    grep CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA * | wc
-
-That tells us the number of lines, words and characters in the file. If
-we just want the number of lines, we can use the ``-l`` flag for
-``lines``.
-
-::
-
-    grep CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA * | wc -l
-
-Redirecting is not super intuitive, but it's really powerful for
-stringing together these different commands, so you can do whatever you
-need to do.
-
-The philosophy behind these command line programs is that none of them
-really do anything all that impressive. BUT when you start chaining them
-together, you can do some really powerful things really efficiently. If
-you want to be proficient at using the shell, you must learn to become
-proficient with the pipe and redirection operators: ``|``, ``>``,
-``>>``.
-
-Creating, moving, copying, and removing
----------------------------------------
-
-Now we can move around in the file structure, look at files, search
-files, redirect. But what if we want to do normal things like copy files
-or move them around or get rid of them. Sure we could do most of these
-things without the command line, but what fun would that be?! Besides
-it's often faster to do it at the command line, or you'll be on a remote
-server like Amazon where you won't have another option.
-
-The ``Centralia_Full_Map.txt`` is one that tells us what environmental
-data goes with which samples. This is a really important file, so we
-want to make a copy so we don't lose it.
-
-Lets copy the file using the ``cp`` command. The ``cp`` command backs up
-the file. Navigate to the ``Fastq/MappingFiles`` directory and enter:
-
-::
-
-    cp Centralia_Full_Map.txt Centralia_Full_Map_backup.txt
-
-Now ``Centralia_Full_Map_backup.txt`` has been created as a copy of
-``Centralia_Full_Map.txt``.
-
-Let's make a ``backup`` directory where we can put this file.
-
-The ``mkdir`` command is used to make a directory. Just enter ``mkdir``
-followed by a space, then the directory name.
-
-::
-
-    mkdir backup
-
-We can now move our backed up file in to this directory. We can move
-files around using the command ``mv``. Enter this command:
-
-::
-
-    mv Centralia_Full_Map_backup.txt backup/
-
-This moves ``Centralia_Full_Map_backup.txt`` into the directory
-``backup/``. Check the full path of backup with ``pwd``
-
-The ``mv`` command is also how you rename files. Since this file is so
-important, let's rename it:
-
-::
-
-    mv Centralia_Full_Map.txt Centralia_Full_Map_IMPORTANT.txt
-
-Now the file name has been changed to
-``Centralia_Full_Map_IMPORTANT.txt``. Let's delete the backup file now:
-
-::
-
-    rm backup/Centralia_Full_Map_backup.txt
-
-The ``rm`` file removes the file. Be careful with this command. It
-doesn't just nicely put the files in the Trash. They're really gone.
-
---------------
-
-**Short Exercise**
-
-Do the following:
-
-1. Rename the ``Centralia_Full_Map_IMPORTANT.txt`` file to
-   ``Centralia_Full_Map.txt``.
-2. Create a directory in the ``Fastq`` directory called ``new``
-3. Then, copy the ``Centralia_Full_Map.txt`` file into ``new``
-
---------------
-
-By default, ``rm``, will NOT delete directories. You can tell ``rm`` to
-delete a directory using the ``-r`` option. Let's delete that ``new``
-directory we just made. Enter the following command:
-
-::
-
-    rm -r new
-
-Writing files
--------------
-
-We've been able to do a lot of work with files that already exist, but
-what if we want to write our own files. Obviously, we're not going to
-type in a FASTA file, but you'll see as we go through other tutorials,
-there are a lot of reasons we'll want to write a file, or edit an
-existing file.
-
-To write in files, we're going to use the program ``nano``. We're going
-to create a file that contains the favorite grep command so you can
-remember it for later. We'll name this file 'awesome.sh'.
-
-::
-
-    nano awesome.sh
-
-Type in your command, so it looks like
-
-::
-
-    grep -B 1 CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA * > good_data.txt
-
-Now we want to save the file and exit. At the bottom of nano, you see
-the "^X Exit". That means that we use Ctrl-X to exit. Type ``Ctrl-X``.
-It will ask if you want to save it. Type ``y`` for yes. Then it asks if
-you want that file name. Hit 'Enter'.
-
-Now you've written a file. You can take a look at it with less or cat,
-or open it up again and edit it.
-
---------------
-
-**Exercise**
-
-Open ``awesome.sh`` and add ``echo AWESOME\!`` after the grep command
-and save the file.
-
-We're going to come back and use this file in just a bit.
-
---------------
-
-Running programs
-----------------
 
 Commands like ``ls``, ``rm``, ``echo``, and ``cd`` are just ordinary
 programs on the computer. A program is just a file that you can
@@ -964,71 +454,484 @@ looks for programs to run. If your program is not in this list, then an
 error is printed. The shell ONLY checks in the places listed in the
 ``PATH`` environment variable.
 
-Navigate to the ``shell`` directory and list the contents. You will
-notice that there is a program (executable file) called ``hello.sh`` in
-this directory. Now, try to run the program by entering:
+Navigate to the ``Shell_Tutorial`` directory and list the contents. You
+will notice that there is a program (executable file) called ``hello``
+in this directory. Now, try to run the program by entering:
 
 ::
 
-    hello.sh
+    hello
 
-You should get an error saying that hello.sh cannot be found. That is
-because the directory ``tutorial_shell`` is not in the ``PATH``. You can
-run the ``hello.sh`` program by entering:
+You should get an error saying that hello cannot be found. That is
+because the directory ``/p3-training/Shell_Tutorial`` is not in the
+``PATH``. You can run the ``hello`` program by entering:
 
 ::
 
-    ./hello.sh
+    ./hello
 
 Remember that ``.`` is a shortcut for the current working directory.
-This tells the shell to run the ``hello.sh`` program which is located
-right here. So, you can run any program by entering the path to that
-program. You can run ``hello.sh`` equally well by specifying its *full
-path*.
+This tells the shell to run the ``hello`` program which is located right
+here. So, you can run any program by entering the path to that program.
+You can run ``hello`` equally well by specifying:
 
-Writing scripts
+::
+
+    /p3-training/Shell_Tutorial/hello
+
+Or by entering:
+
+::
+
+    ../Shell_Tutorial/hello
+
+When there are no ``/`` characters, the shell assumes you want to look
+in one of the default places for the program.
+
+Examining Files
 ---------------
 
-We know how to write files and run scripts, so I bet you can guess where
-this is headed. We're going to run our own script!
+We now know how to switch directories, run programs, and look at the
+contents of directories, but how do we look at the contents of files?
 
-Go in to the 'MiSeq' directory where we created 'awesome.sh' before.
-Remember we wrote our favorite grep command in there. Since we like it
-so much, we might want to run it again, or even all the time. Instead of
-writing it out every time, we can just run it as a script.
-
-It's a command, so we should just be able to run it. Give it try.
+The easiest way to examine a file is to just print out all of the
+contents using the program ``cat``. Enter the following command:
 
 ::
 
-    ./awesome.sh
+    cat ex_data.txt
 
-Alas, we get ``-bash: ./awesome.sh: Permission denied``. This is because
-we haven't told the computer that it's a program. To do that we have to
-make it 'executable'. We do this by changing its mode. The command for
-that is ``chmod`` - change mode. We're going to change the mode of this
-file, so that it's executable and the computer knows it's OK to run it
-as a program.
+This prints out the contents of the ``ex_data.txt`` file. If you enter:
 
 ::
 
-    chmod +x awesome.sh
+    cat ex_data.txt ex_data.txt
 
-Now let's try running it again:
+It will print out the contents of ``ex_data.txt`` twice. ``cat`` just
+takes a list of file names and writes them out one after another (this
+is where the name comes from, ``cat`` is short for concatenate).
+
+--------------
+
+**Short Exercises**
+
+1. Print out the contents of the ``~/Shell_Tutorial/dictionary.txt``
+   file. What does this file contain?
+
+2. Without changing directories, (you should still be in
+   ``Shell_Tutorial``), use one short command to print the contents of
+   all of the files in the
+   ``/home/p3-training/Shell_Tutorial/data/THOMAS`` directory.
+
+--------------
+
+``cat`` is a terrific program, but when the file is really big, it can
+be annoying to use. The program, ``less``, is useful for this case.
+Enter the following command:
 
 ::
 
-    ./awesome.sh
+    less ~/Shell_Tutorial/dictionary.txt
 
-Now you should have seen some output, and of course, it's AWESOME!
-Congratulations, you just created your first shell script! You're set to
-rule the world.
+``less`` opens the file, and lets you navigate through it. The commands
+are identical to the ``man`` program. Use ``space`` to go forward and
+hit the ``b`` key to go backwards. The ``g`` key goes to the beginning
+of the file and ``G`` goes to the end. Finally, hit ``q`` to quit.
 
-For Future Reference
---------------------
+``less`` also gives you a way of searching through files. Just hit the
+``/`` key to begin a search. Enter the name of the word you would like
+to search for and hit enter. It will jump to the next location where
+that word is found. Try searching the ``dictionary.txt`` file for the
+word ``cat``. If you hit ``/`` then "enter", ``less`` will just repeat
+the previous search. ``less`` searches from the current location and
+works its way forward. If you are at the end of the file and search for
+the word ``cat``, ``less`` will not find it. You need to go to the
+beginning of the file and search.
+
+Remember, the ``man`` program uses the same commands, so you can search
+documentation using ``/`` as well!
+
+Redirection
+-----------
+
+Let's turn to the experimental data from the hearing tests that we began
+with. This data is located in the ``~/Shell_Tutorial/data`` directory.
+Each subdirectory corresponds to a particular participant in the study.
+Navigate to the ``Bert`` subdirectory in ``data``. There are a bunch of
+text files which contain experimental data results. Lets print them all:
+
+::
+
+    cat au*
+
+Now enter the following command:
+
+::
+
+    cat au* > ../all_data
+
+This tells the shell to take the output from the ``cat au*`` command and
+dump it into a new file called ``../all_data``. To verify that this
+worked, examine the ``all_data`` file. If ``all_data`` had already
+existed, we would overwritten it. So the ``>`` character tells the shell
+to take the output from what ever is on the left and dump it into the
+file on the right. The ``>>`` characters do almost the same thing,
+except that they will append the output to the file if it already
+exists.
+
+--------------
+
+**Short Exercise**
+
+Use ``>>``, to append the contents of all of the files which contain the
+number 4 in the directory:
+
+::
+
+    ~/Shell_Tutorial/data/gerdal
+
+to the existing ``all_data`` file. Thus, when you are done ``all_data``
+should contain all of the experiment data from Bert and any experimental
+data file from gerdal that contains the number 4.
+
+--------------
+
+Creating, moving, copying, and removing
+---------------------------------------
+
+We've created a file called ``all_data`` using the redirection operator
+``>``. This file is critical - it's our analysis results - so we want to
+make copies so that the data is backed up. Lets copy the file using the
+``cp`` command. The ``cp`` command backs up the file. Navigate to the
+``data`` directory and enter:
+
+::
+
+    cp all_data all_data_backup
+
+Now ``all_data_backup`` has been created as a copy of ``all_data``. We
+can move files around using the command ``mv``. Enter this command:
+
+::
+
+    mv all_data_backup /tmp/
+
+This moves ``all_data_backup`` into the directory ``/tmp``. The
+directory ``/tmp`` is a special directory that all users can write to.
+It is a temporary place for storing files. Data stored in ``/tmp`` is
+automatically deleted when the computer shuts down.
+
+The ``mv`` command is also how you rename files. Since this file is so
+important, let's rename it:
+
+::
+
+    mv all_data all_data_IMPORTANT
+
+Now the file name has been changed to ``all_data_IMPORTANT``. Let's
+delete the backup file now:
+
+::
+
+    rm /tmp/all_data_backup
+
+The ``mkdir`` command is used to create a directory. Just enter
+``mkdir`` followed by a space, then the directory name.
+
+--------------
+
+**Short Exercise**
+
+Do the following:
+
+1. Rename the ``all_data_IMPORTANT`` file to ``all_data``.
+2. Create a directory in the ``data`` directory called ``foo``
+3. Then, copy the ``all_data`` file into ``foo``
+
+--------------
+
+By default, ``rm``, will NOT delete directories. You can tell ``rm`` to
+delete a directory using the ``-r`` option. Enter the following command:
+
+::
+
+    rm -r foo
+
+Count the words
+---------------
+
+The ``wc`` program (word count) counts the number of lines, words, and
+characters in one or more files. Make sure you are in the ``data``
+directory, then enter the following command:
+
+::
+
+    wc Bert/* gerdal/*4*
+
+For each of the files indicated, ``wc`` has printed a line with three
+numbers. The first is the number of lines in that file. The second is
+the number of words. Finally, the total number of characters is
+indicated. The final line contains this information summed over all of
+the files. Thus, there were ``10445`` characters in total.
+
+Remember that the ``Bert/*`` and ``gerdal/*4*`` files were merged into
+the ``all_data`` file. So, we should see that ``all_data`` contains the
+same number of characters:
+
+::
+
+    wc all_data
+
+Every character in the file takes up one byte of disk space. Thus, the
+size of the file in bytes should also be 10445. Let's confirm this:
+
+::
+
+    ls -l all_data
+
+Remember that ``ls -l`` prints out detailed information about a file and
+that the fifth column is the size of the file in bytes.
+
+The awesome power of the Pipe
+-----------------------------
+
+Suppose I wanted to only see the total number of character, words, and
+lines across the files ``Bert/*`` and ``gerdal/*4*``. I don't want to
+see the individual counts, just the total. Of course, I could just do:
+
+::
+
+    wc all_data
+
+Since this file is a concatenation of the smaller files. Sure, this
+works, but I had to create the ``all_data`` file to do this. Thus, I
+have wasted a precious 7062 bytes of hard disk space. We can do this
+*without* creating a temporary file, but first I have to show you two
+more commands: ``head`` and ``tail``. These commands print the first
+few, or last few, lines of a file, respectively. Try them out on
+``all_data``:
+
+::
+
+    head all_data
+    tail all_data
+
+The ``-n`` option to either of these commands can be used to print the
+first or last ``n`` lines of a file. To print the first/last line of the
+file use:
+
+::
+
+    head -n 1 all_data
+    tail -n 1 all_data
+
+Let's turn back to the problem of printing only the total number of
+lines in a set of files without creating any temporary files. To do
+this, we want to tell the shell to take the output of the
+``wc Bert/* gerdal/*4*`` and send it into the ``tail -n 1`` command. The
+``|`` character (called pipe) is used for this purpose. Enter the
+following command:
+
+::
+
+    wc Bert/* gerdal/Data0559 | tail -n 1
+
+This will print only the total number of lines, characters, and words
+across all of these files. What is happening here? Well, ``tail``, like
+many command line programs will read from the *standard input* when it
+is not given any files to operate on. In this case, it will just sit
+there waiting for input. That input can come from the user's keyboard
+*or from another program*. Try this:
+
+::
+
+    tail -n 2
+
+Notice that your cursor just sits there blinking. Tail is waiting for
+data to come in. Now type:
+
+::
+
+    French
+    fries
+    are
+    good
+
+then CONTROL+d. You should is the lines:
+
+::
+
+    are
+    good
+
+printed back at you. The CONTROL+d keyboard shortcut inserts an
+*end-of-file* character. It is sort of the standard way of telling the
+program "I'm done entering data". The ``|`` character is replaces the
+data from the keyboard with data from another command. You can string
+all sorts of commands together using the pipe.
+
+The philosophy behind these command line programs is that none of them
+really do anything all that impressive. BUT when you start chaining them
+together, you can do some really powerful things really efficiently. If
+you want to be proficient at using the shell, you must learn to become
+proficient with the pipe and redirection operators: ``|``, ``>``,
+``>>``.
+
+**A sorting example**
+
+Let's create a file with some words to sort for the next example. We
+want to create a file which contains the following names:
+
+::
+
+    Bob
+    Alice
+    Diane
+    Charles
+
+To do this, we need a program which allows us to create text files.
+There are many such programs, the easiest one which is installed on
+almost all systems is called ``nano``. Navigate to ``/tmp`` and enter
+the following command:
+
+::
+
+    nano toBeSorted
+
+Now enter the four names as shown above. When you are done, press
+CONTROL+O to write out the file. Press enter to use the file name
+``toBeSorted``. Then press CONTROL+x to exit ``nano``.
+
+When you are back to the command line, enter the command:
+
+::
+
+    sort toBeSorted
+
+Notice that the names are now printed in alphabetical order.
+
+--------------
+
+**Short Exercise**
+
+Use the ``echo`` command and the append operator, ``>>``, to append your
+name to the file, then sort it and make a new file called Sorted.
+
+--------------
+
+Let's navigate back to ``~/Shell_Tutorial/data``. Enter the following
+command:
+
+::
+
+    wc Bert/* | sort -k 3 -n
+
+We are already familiar with what the first of these two commands does:
+it creates a list containing the number of characters, words, and lines
+in each file in the ``Bert`` directory. This list is then piped into the
+``sort`` command, so that it can be sorted. Notice there are two options
+given to sort:
+
+1. ``-k 3``: Sort based on the third column
+2. ``-n``: Sort in numerical order as opposed to alphabetical order
+
+Notice that the files are sorted by the number of characters.
+
+--------------
+
+**Short Exercise**
+
+Use the ``man`` command to find out how to sort the output from ``wc``
+in reverse order.
+
+--------------
+
+--------------
+
+**Short Exercise**
+
+Combine the ``wc``, ``sort``, ``head`` and ``tail`` commands so that
+only the ``wc`` information for the largest file is listed
+
+Hint: To print the smallest file, use:
+
+::
+
+    wc Bert/* | sort -k 3 -n | head -n 1
+
+--------------
+
+Printing the smallest file seems pretty useful. We don't want to type
+out that long command often. Let's create a simple script, a simple
+program, to run this command. The program will look at all of the files
+in the current directory and print the information about the smallest
+one. Let's call the script ``smallest``. We'll use ``nano`` to create
+this file. Navigate to the ``data`` directory, then:
+
+::
+
+    nano smallest
+
+Then enter the following text:
+
+::
+
+    #!/bin/bash
+    wc * | sort -k 3 -n | head -n 1
+
+Now, ``cd`` into the ``Bert`` directory and enter the command
+``../smallest``. Notice that it says permission denied. This happens
+because we haven't told the shell that this is an executable file. If
+you do ``ls -l ../smallest``, it will show you the permissions on the
+left of the listing.
+
+Enter the following commands:
+
+::
+
+    chmod a+x ../smallest
+    ../smallest
+
+The ``chmod`` command is used to modify the permissions of a file. This
+particular command modifies the file ``../smallest`` by giving all users
+(notice the ``a``) permission to execute (notice the ``x``) the file. If
+you enter:
+
+::
+
+    ls -l ../smallest
+
+You will see that the file name is green and the permissions have
+changed. Congratulations, you just created your first shell script!
+
+Searching files
+===============
+
+You can search the contents of a file using the command ``grep``. The
+``grep`` program is very powerful and useful especially when combined
+with other commands by using the pipe. Navigate to the ``Bert``
+directory. Every data file in this directory has a line which says
+"Range". The range represents the smallest frequency range that can be
+discriminated. Lets list all of the ranges from the tests that Bert
+conducted:
+
+::
+
+    grep Range *
+
+--------------
+
+**Short Exercise**
+
+Create an executable script called ``smallestrange`` in the ``data``
+directory, that is similar to the ``smallest`` script, but prints the
+file containing the file with the smallest Range. Use the commands
+``grep``, ``sort``, and ``tail`` to do this.
+
+--------------
 
 Finding files
--------------
+=============
 
 The ``find`` program can be used to find files based on arbitrary
 criteria. Navigate to the ``data`` directory and enter the following
@@ -1076,3 +979,62 @@ A faster way to do this is to use the ``xargs`` command:
 pipe them to ``xargs``. ``xargs`` takes the items given to it and passes
 them as arguments to ``grep``. ``xargs`` generally only creates a single
 instance of ``grep`` (or whatever program it is running).
+
+--------------
+
+**Short Exercise**
+
+Navigate to the ``data`` directory. Use one ``find`` command to perform
+each of the operations listed below (except number 2, which does not
+require a ``find`` command):
+
+1. Find any file whose name is "NOTES" within ``data`` and delete it
+
+2. Create a new directory called ``cleaneddata``
+
+3. Move all of the files within ``data`` to the ``cleaneddata``
+   directory
+
+4. Rename all of the files to ensure that they end in ``.txt`` (note: it
+   is ok for the file name to end in ``.txt.txt``
+
+Hint: If you make a mistake and need to start over just do the
+following:
+
+1. Navigate to the ``Shell_Tutorial`` directory
+
+2. Delete the ``data`` directory
+
+3. Enter the command: ``git checkout -- data`` You should see that the
+   data directory has reappeared in its original state
+
+**BONUS**
+
+Redo exercise 4, except rename only the files which do not already end
+in ``.txt``. You will have to use the ``man`` command to figure out how
+to search for files which do not match a certain name.
+
+--------------
+
+Bonus:
+------
+
+**backtick, xargs**: Example find all files with certain text
+
+**alias** -> rm -i
+
+**variables** -> use a path example
+
+**.bashrc**
+
+**du**
+
+**ln**
+
+**ssh and scp**
+
+**Regular Expressions**
+
+**Permissions**
+
+**Chaining commands together**
