@@ -16,6 +16,14 @@ You will need to know some things prior to this tutorial:
 
 1.  Ability to navigate in the unix shell.
 
+Install BLAST
+-------------
+Navigate to any directory and execute the following::
+
+    sudo apt-get install ncbi-blast+
+    
+Now BLAST is installed locally on your machine.  You will now need collect/download files to run BLAST on!    
+
 Running BLAST
 -------------
 
