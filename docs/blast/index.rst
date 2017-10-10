@@ -37,15 +37,16 @@ You can grab this data by the following command.  Navigate to your home director
 
 This will go to a version-controlled server on Github and make a copy of this data onto your local computer in a folder called "blast-tutorial-data".  You should be aware of where this folder and data exist.  Git is a great program and VERY useful for bioformatics -- I would highly suggest you learn more about it and maybe we will have time to discuss it more.
 
+Let's navigate to a the data folder within this data::
+
+    cd /home/p3-training/blast-tutorial-data/data
+    
+    
 The first thing we need to do is to tell BLAST that our nifH reference genes contained in nifh-ref.fa are (a) a database, and (b) a nucleotide database.  That's done by calling 'makeblastdb'::
 
     makeblastdb -in nifh-ref.fa -dbtype nucl
 
 Next, we can run BLAST, or more specifically blastn (nucleotide against nucleotides alignment) by using the following command::
-
-    blastn -query corn.fa -db nifh-ref.fa 
-
-If you get an error, and if you are copy and pasting you WILL get an error, think about paths and where the data is contained.  Navigate to the data directory and try::
 
     blastn -query metags/corn.fa -db nifh-ref.fa
 
@@ -55,7 +56,7 @@ You'll see a BLAST output print to the screen really fast.  To save it, you can 
 
 Maybe you don't want to see all the alignments but would rather have a tabular output.  You can check out how to do this `in the manual <http://www.ncbi.nlm.nih.gov/books/NBK279675/>`_ and with the command::
 
-    blastn -query metags/corn.fa -db nifh-ref.fa -out metags/corn.fa.x.nifh.blastnout.tsv -outfmt 6
+    blastn -query metags/corn.fa -db nifh-ref.fa -out corn.fa.x.nifh.blastnout.tsv -outfmt 6
  
 You can save the BLAST output to a tabular output that can be easily parsed.
 
