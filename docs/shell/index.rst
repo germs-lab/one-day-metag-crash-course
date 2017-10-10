@@ -6,7 +6,6 @@ Khetani**
 **Modified by Jared Flater and Adina Howe**
 
 Exercise solutions have been posted as an ipython notebook.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can view `solutions
 here <https://nbviewer.jupyter.org/github/germs-lab/softwarecarpentry/blob/master/day1.shell/exercise_solutions.ipynb>`__
