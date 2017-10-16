@@ -149,7 +149,7 @@ You could now imagine writing a program where you made a list of IDs you want to
 
 To see the documentation for this script in the scripts directory::
 
-    python fetch-genomes-fasta.py
+    python2 fetch-genomes-fasta.py
 
 You'll see that you need to provide a list of IDs and a directory where you want to save the downloaded files.
 
