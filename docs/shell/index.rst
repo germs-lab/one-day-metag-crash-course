@@ -257,7 +257,7 @@ directory if you are not already there. Then enter the command:
 
 ::
 
-    ls /home/p3-training/Shell_Tutorial/ 
+    ls /home/miga/Shell_Tutorial/ 
 
 Saving time with shortcuts, wild cards, and tab completion
 ----------------------------------------------------------
@@ -281,7 +281,7 @@ above your current directory. Thus:
 
     ls ..
 
-prints the contents of the ``/home/p3-training/`` directory. You can
+prints the contents of the ``/home/miga/`` directory. You can
 chain these together, so:
 
 ::
@@ -295,7 +295,7 @@ the contents of the current directory. This may seem like a useless
 shortcut right now, but we'll see when it is needed in a little while.
 
 To summarize, the commands ``ls ~``, ``ls ~/.``, ``ls ../../``, and
-``ls /home/p3-training/Shell_Tutorial/`` all do exactly the same thing.
+``ls /home/miga/Shell_Tutorial/`` all do exactly the same thing.
 These shortcuts are not necessary, they are provided for your
 convenience.
 
@@ -462,7 +462,7 @@ in this directory. Now, try to run the program by entering:
     hello
 
 You should get an error saying that hello cannot be found. That is
-because the directory ``/p3-training/Shell_Tutorial`` is not in the
+because the directory ``/miga/Shell_Tutorial`` is not in the
 ``PATH``. You can run the ``hello`` program by entering:
 
 ::
@@ -476,7 +476,7 @@ You can run ``hello`` equally well by specifying:
 
 ::
 
-    /p3-training/Shell_Tutorial/hello
+    /miga/Shell_Tutorial/hello
 
 Or by entering:
 
@@ -520,7 +520,7 @@ is where the name comes from, ``cat`` is short for concatenate).
 2. Without changing directories, (you should still be in
    ``Shell_Tutorial``), use one short command to print the contents of
    all of the files in the
-   ``/home/p3-training/Shell_Tutorial/data/THOMAS`` directory.
+   ``/home/miga/Shell_Tutorial/data/THOMAS`` directory.
 
 --------------
 
