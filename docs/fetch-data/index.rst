@@ -110,14 +110,14 @@ Download the gene with eutils commands in your web-browser and take a look at th
 
 On your web-browser, paste the following URL to download the nucleotide genome for gene X51500.1::
 
-    http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=X51500.1&rettype=fasta&retmode=text
+    https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=X51500.1&rettype=fasta&retmode=text
 
 Bringing this to the command line
 ---------------------------------
 
 Try downloading the GenBank file instead by pasting this onto your web-browser::
 
-   http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=CP000962&rettype=gb&retmode=text
+   https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=CP000962&rettype=gb&retmode=text
 
 Do you notice the difference in these two commands?  Let's breakdown the command here:
 
@@ -139,11 +139,11 @@ Download a gene sequence on the command line.
 
 Going back onto your instance, in the shell, you could run the same commands above with the addition of *curl* on your EC2 instance::
 
-    curl "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=X51500.1&rettype=fasta&retmode=text"
+    curl "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=X51500.1&rettype=fasta&retmode=text"
 
 You'll see it fly on to your screen.  Don't panic - you can save it to a file and make it more useful BUT note the path you are in and where you will save this file (as long as you know...that's fine)::
 
-    curl "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=X51500.1&rettype=fasta&retmode=text" > X51500.1.fa
+    curl "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=X51500.1&rettype=fasta&retmode=text" > X51500.1.fa
 
 You could now imagine writing a program where you made a list of IDs you want to download and put it in a for loop, *curling* each genome and saving it to a file.  The following is a `script <https://github.com/adina/tutorial-ngs-2014/blob/master/ncbi/fetch-genomes.py>`_.  Thanks to Jordan Fish who gave me the original version of this script before I even knew how and made it easy to use.
 
@@ -158,7 +158,7 @@ Scaling up sequencing downloading from a list
 
 Run this script (note that your paths for the script or data may need to be specified) -- also see note below::
 
-    python scripts/fetch-genomes-fasta.py data/300-nifh-genes.txt data/nifh-database-fastas
+    python2 scripts/fetch-genome.py data/300-nifh-genes.txt data/nifh-database-fastas
 
 Sit back and think of the glory that is happening on your screen right now...
 
@@ -176,7 +176,7 @@ Look at the script/program content in "fetch-genomes-fasta.py".
 
 The meat of this script uses the following code::
 
-    url_template = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&id=%s&rettype=gb&retmode=text"
+    url_template = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&id=%s&rettype=gb&retmode=text"
 
 You'll see that the *id* here is a string character which is obtained from list of IDs contained in a separate file.  The rest of the script manages where the files are being placed and what they are named.  It also prints some output to the screen so you know its running.
 
