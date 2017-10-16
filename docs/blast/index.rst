@@ -39,7 +39,7 @@ This will go to a version-controlled server on Github and make a copy of this da
 
 Let's navigate to a the data folder within this data::
 
-    cd /home/p3-training/blast-tutorial-data/data
+    cd /home/miga/blast-tutorial-data/data
     
     
 The first thing we need to do is to tell BLAST that our nifH reference genes contained in nifh-ref.fa are (a) a database, and (b) a nucleotide database.  That's done by calling 'makeblastdb'::
