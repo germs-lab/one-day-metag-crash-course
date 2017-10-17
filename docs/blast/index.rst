@@ -37,9 +37,11 @@ You can grab this data by the following command.  Navigate to your home director
 
 This will go to a version-controlled server on Github and make a copy of this data onto your local computer in a folder called "blast-tutorial-data".  You should be aware of where this folder and data exist.  Git is a great program and VERY useful for bioformatics -- I would highly suggest you learn more about it and maybe we will have time to discuss it more.
 
-Let's navigate to a the data folder within this data::
+Let's navigate to a the data folder and UPDATE this folder and look at this data::
 
-    cd /home/miga/blast-tutorial-data/data
+    cd blast-tutorial-data
+    git pull
+    cd data
     
     
 The first thing we need to do is to tell BLAST that our nifH reference genes contained in nifh-ref.fa are (a) a database, and (b) a nucleotide database.  That's done by calling 'makeblastdb'::
