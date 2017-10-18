@@ -24,13 +24,13 @@ If BLAST is not installed, follow these steps.
 Navigate to any directory and execute the following::
 
     sudo apt-get install ncbi-blast+
-    
-Now BLAST is installed locally on your machine.  You will now need collect/download files to run BLAST on!    
+
+Now BLAST is installed locally on your machine.  You will now need collect/download files to run BLAST on!
 
 Running BLAST
 -------------
 
-First! We need some data.  In the last tutorial, we learned how to get data for a reference genome from an API, specifically NCBI's API.  In this tutorial, we will use a subset of this reference database.  
+First! We need some data.  In the last tutorial, we learned how to get data for a reference genome from an API, specifically NCBI's API.  In this tutorial, we will use a subset of this reference database.
 
 Also, we will imagine that we have three metagenomes from three soil types:  a corn field, a soybean field, and a prairie field.  We are going to identify known nitrogen fixation genes in these metagenomes.
 
@@ -45,23 +45,23 @@ Let's navigate to a the data folder and UPDATE this folder and look at this data
     cd blast-tutorial-fungene
     cd data
     ls
-    
+
 The first thing we need to do is to tell BLAST that our nifH reference genes contained in fungene_9.3_nifH_1122_unaligned_nucleotide_seqs.fa are (a) a database, and (b) a nucleotide database.  That's done by calling 'makeblastdb'::
 
-    makeblastdb -in nifh-ref.fa -dbtype nucl
+    makeblastdb -in fungene_9.3_nifH_1122_unaligned_nucleotide_seqs.fa -dbtype nucl
 
 Next, we can run BLAST, or more specifically blastn (nucleotide against nucleotides alignment) by using the following command::
 
-    blastn -query metags/corn.fa -db nifh-ref.fa
+    blastn -query metags/corn.fa -db fungene_9.3_nifH_1122_unaligned_nucleotide_seqs.fa
 
 You'll see a BLAST output print to the screen really fast.  To save it, you can identify the name of an output file::
 
-    blastn -query metags/corn.fa -db nifh-ref.fa -out metags/corn.fa.x.nifh.blastnout.txt
+    blastn -query metags/corn.fa -db fungene_9.3_nifH_1122_unaligned_nucleotide_seqs.fa -out metags/corn.fa.x.nifh.blastnout.txt
 
 Maybe you don't want to see all the alignments but would rather have a tabular output.  You can check out how to do this `in the manual <http://www.ncbi.nlm.nih.gov/books/NBK279675/>`_ and with the command::
 
-    blastn -query metags/corn.fa -db nifh-ref.fa -out corn.fa.x.nifh.blastnout.tsv -outfmt 6
- 
+    blastn -query metags/corn.fa -db fungene_9.3_nifH_1122_unaligned_nucleotide_seqs.fa -out corn.fa.x.nifh.blastnout.tsv -outfmt 6
+
 You can save the BLAST output to a tabular output that can be easily parsed.
 
 Automation exercise
@@ -69,7 +69,7 @@ Automation exercise
 
 You can save a lot of time if you learn how to automate things in the shell.  Try the following command when in the data folder::
 
-    for x in metags/*fa; do blastn -query $x -db nifh-ref.fa -outfmt 6 -out $x.x.nifh.blastnout.tsv; done
+    for x in metags/*fa; do blastn -query $x -db fungene_9.3_nifH_1122_unaligned_nucleotide_seqs.fa -outfmt 6 -out $x.x.nifh.blastnout.tsv; done
 
 What does it do?
 
@@ -94,7 +94,7 @@ So now we have a file where we have all the best hit reads associated with known
 
     python ../scripts/count-up.py metags/*best
 
-This creates a file in the data folder called "summary-count.tsv".  
+This creates a file in the data folder called "summary-count.tsv".
 
 Take a look at this file.
 
@@ -103,7 +103,7 @@ Adding annotations
 
 Finally, you might think to yourself that the NCBI accession numbers aren't that useful.  But we can grab more details for these IDs, after all we have the sequence file with the associated gene description, nif-ref.fa.  Try this script::
 
-	 python ../scripts/import-ann.py nifh-ref.fa summary-count.tsv > summary-count.annotations.tsv
+	 python ../scripts/import-ann.py fungene_9.3_nifH_1122_unaligned_nucleotide_seqs.fa summary-count.tsv > summary-count.annotations.tsv
 
 Take a look at the summary-count.annotations.tsv
 
@@ -111,4 +111,3 @@ Conclusion
 ----------
 
 So now you've executed at least 3 programs within this single tutorial.  There is a lot more to learn about how to write your own scripts, but this is the first step towards understanding the value of being able to code.  And actually, you've been coding along! executing for loops in shell.  How much have you learned in one day?  Hopefully its an incentive to keep learning!
-
