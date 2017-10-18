@@ -16,8 +16,11 @@ You will need to know some things prior to this tutorial:
 
 1.  Ability to navigate in the unix shell.
 
-Install BLAST
--------------
+Install BLAST - Students working on a shared computer can likely skip this step
+-------------------------------------------------------------------------------
+
+If BLAST is not installed, follow these steps.
+
 Navigate to any directory and execute the following::
 
     sudo apt-get install ncbi-blast+
@@ -33,18 +36,17 @@ Also, we will imagine that we have three metagenomes from three soil types:  a c
 
 You can grab this data by the following command.  Navigate to your home directory and execute the following::
 
-    git clone https://github.com/germs-lab/blast-tutorial-data.git
+    git clone https://github.com/germs-lab/blast-tutorial-fungene.git
 
 This will go to a version-controlled server on Github and make a copy of this data onto your local computer in a folder called "blast-tutorial-data".  You should be aware of where this folder and data exist.  Git is a great program and VERY useful for bioformatics -- I would highly suggest you learn more about it and maybe we will have time to discuss it more.
 
 Let's navigate to a the data folder and UPDATE this folder and look at this data::
 
-    cd blast-tutorial-data
-    git pull
+    cd blast-tutorial-fungene
     cd data
+    ls
     
-    
-The first thing we need to do is to tell BLAST that our nifH reference genes contained in nifh-ref.fa are (a) a database, and (b) a nucleotide database.  That's done by calling 'makeblastdb'::
+The first thing we need to do is to tell BLAST that our nifH reference genes contained in fungene_9.3_nifH_1122_unaligned_nucleotide_seqs.fa are (a) a database, and (b) a nucleotide database.  That's done by calling 'makeblastdb'::
 
     makeblastdb -in nifh-ref.fa -dbtype nucl
 
