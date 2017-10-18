@@ -15,7 +15,7 @@ Three main tutorial sections:
 * :ref:`Unix Shell <shell>`
 * :ref:`Getting data <fetch-data>`
 * :ref:`Running a program <blast>`
-* :ref:`Fungene tutorial and BLASTing again <blast-fungene>`
+* :ref:`Fungene and BLAST <blast-fungene>`
 
 Resources:
 
