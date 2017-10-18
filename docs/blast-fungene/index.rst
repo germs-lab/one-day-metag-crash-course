@@ -67,11 +67,19 @@ You can save the BLAST output to a tabular output that can be easily parsed.
 Automation exercise
 -------------------
 
+For loops are a great way to start scaling and automating data analysis.  Give this code a try::
+
+     for x in 1 2 3 4 5; do echo "for loop is counting $x"; done
+     
+What do you think the for loop is doing?  Navigate to the "metags" folder.  Let's now try it for a program::
+
+    for x in corn.fa prairie.fa soybean.fa; do head -n 2 $x; done
+
+This prints out the first two lines of each file.
+
 You can save a lot of time if you learn how to automate things in the shell.  Try the following command when in the data folder::
 
     for x in metags/*fa; do blastn -query $x -db fungene_9.3_nifH_1122_unaligned_nucleotide_seqs.fa -outfmt 6 -out $x.x.nifh.blastnout.tsv; done
-
-What does it do?
 
 Getting the best hit
 --------------------
@@ -81,9 +89,6 @@ BLAST will find every gene which "hits" a sequence read and a single read will h
     python ../scripts/best-hit.py metags/corn.fa.x.nifh.blastnout.tsv > metags/corn.fa.x.nifh.blastnout.tsv.best
 
 Compare the metags/corn.fa.x.nifh.blastnout.tsv and metags/corn.fa.x.nifh.blastnout.tsv.best.
-
-For loop exercise - best hits
------------------------------
 
 Using a for loop, save files for each blast output that only include the best hits. Make sure you end the file names with the word "best".  Also, make sure you have only 3 files like this.  You can delete ones from previous exercises if necessary.
 
