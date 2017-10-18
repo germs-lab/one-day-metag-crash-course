@@ -45,3 +45,10 @@ Resources:
    :maxdepth: 2
 
    blast/index
+   
+.. blast-fungene:
+
+.. toctree::
+   :maxdepth: 2
+
+   blast-fungene/index
