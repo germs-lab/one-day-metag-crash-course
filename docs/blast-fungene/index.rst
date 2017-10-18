@@ -1,5 +1,5 @@
-Running a bioinformatic program
-================================
+Fungene is FUN!
+===============
 
 
 Learning objectives
