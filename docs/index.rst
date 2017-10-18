@@ -46,7 +46,7 @@ Resources:
 
    blast/index
    
-.. blast-fungene:
+.. _blast-fungene:
 
 .. toctree::
    :maxdepth: 2
